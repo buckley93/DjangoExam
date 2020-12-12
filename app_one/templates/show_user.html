@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1 class="header"> Quotes added be {{user.First_name}} {{user.Last_name}}</h1> <p class="navbar"><a href="/logout" >Logout!</a> <a href="/success">Dashboard</a></p>
+    <p>number ofquotes added by this user : {{count}} </p>
+    {% for x in quotes %}
+    <div class="container">
+            <br>
+            <h3>{{x.madeBy}}</h3>
+            <p>{{x.message}}</p>
+            <p>(added by {{x.uploaded_by.First_name}} {{x.uploaded_by.Last_name}})</p>
+            <br>
+        </div>
+    {% endfor %}    
+    
+    <a href="/success">Go back</a>
+    
+</body>
+</html>

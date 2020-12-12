@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body> 
+    <h1 class="welcome">Welcome!</h1>
+    <div class="wrapper">
+    {% if messages %}
+        {% for message in messages %}
+            <p class="errors">{{message}}</p>
+        {% endfor %}
+    {% endif %}
+        <div class="registration">
+            <form action="/register" method="POST">
+                {% csrf_token %}
+                <h2>Register</h2>
+                <p>First name <input type="text" name="Fname" id=""></p>
+                <p>Last name <input type="text" name="Lname" id=""></p>
+                <p>Birth Date <input type="date" name="Date" id=""></p>
+                <p>Email <input type="text" name="Email" id=""></p>
+                <p>Password <input type="text" name="PW" id=""></p>
+                <p>Confirm Password <input type="text" name="Confirm_pw" id=""></p>
+                <input type="submit" value="Register!">
+            </form>
+        </div>
+        <div class="login">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+                {% csrf_token %}
+                <p>Email <input type="text" name="Email"></p>
+                <p>Password <input type="text" name="PW"></p>
+                <input type="submit" value="Login!">
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

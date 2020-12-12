@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <p class="navbar"><a href="/logout" >Logout!</a> <a href="/success">Dashboard</a></p>
+    <h1> edit quote!</h1>
+    {% for x in quote %}
+    <form action="/quotes/{{x.id}}/edit" method="POST">
+        {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                <p class="errors">{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        <p>Quoted By <textarea name="madeBy" cols="50" rows="5" placeholder="{{x.madeBy}}"></textarea></p>
+        <p>Message<textarea name="message" cols="30" rows="15" placeholder="{{x.message}}"></textarea></p>
+        <button type="submit">Add!</button>
+    </form>
+</div>
+    {% endfor %}
+</body>
+</html>

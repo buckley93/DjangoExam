@@ -1,0 +1,58 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+.wrapper {
+    width: 1000px;
+    height: 1000px;
+    background-color: whitesmoke;
+    padding-top: 25px ;
+}
+.welcome{
+    background-color: teal;
+    width: 1000px;
+}
+.login{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 300px;
+}
+.registration{
+    display: inline-block;
+}
+.errors{
+    color: red;
+}
+.suc{
+    color: green;
+}
+.welcome h1{
+    display: inline-block;
+}
+.welcome a{
+    display: inline-block;
+    margin-left: 600px;
+}
+.Quotable{
+    display: inline-block;
+    text-align: top;
+}
+.your_favorites{
+    display: inline-block;
+    margin-left: 200px;
+    border
+}
+.addFavorite{
+    color: green;
+}
+.removefavorites{
+    color: red;
+}
+.header{
+    display: inline-block;
+}
+.navbar{
+    display: inline-block;
+    margin-left: 1000px;
+    vertical-align: top;
+}

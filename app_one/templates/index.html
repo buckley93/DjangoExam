@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="welcome">
+        <h1>Welcome, {{loggedInUser.First_name}} {{loggedInUser.Last_name}}</h1>
+        <a href="/logout">Logout!</a>
+    </div>
+    <hr>
+    <div class="Quotable">
+        <br>
+        <div class = "quotes">
+            <p>Quotable Quotes</p>
+        {% for x in quotes %}
+            {% if not loggedInUser in x.favorited_by.all %}
+                {% if x.uploaded_by.id != request.session.loggedInId %}
+                    <br>
+                    <p>{{x.madeBy}}: {{x.message}}</p>
+                    <p>Posted by: <a href="/showuser/{{x.uploaded_by.id}}">{{x.uploaded_by.First_name}} {{x.uploaded_by.Last_name}}</a></p>
+                    <button ><a href="/favorite/{{x.id}}" class="addFavorite">add to favorites</a></button>
+                    <br>
+                    {% else %}
+                    <br>
+                    <p>{{x.madeBy}}: {{x.message}}</p>
+                    <p>Posted by: <a href="/showuser/{{x.uploaded_by.id}}">{{x.uploaded_by.First_name}} {{x.uploaded_by.Last_name}}</a></p>
+                    <button ><a href="/favorite/{{x.id}}" class="addFavorite">add to favorites</a></button>
+                    <a href="/quotes/{{x.id}}/delete">delete</a>
+                    <a href="/quotes/{{x.id}}">edit</a>
+                    <br>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+    <div class="your_favorites">
+        <p>favorited quotes</p>
+        {% for x in quotes %}
+            {% if loggedInUser in x.favorited_by.all %}
+                {% if x.uploaded_by.id != request.session.loggedInId %}
+                    <br>
+                    <p>{{x.madeBy}}: {{x.message}}</p>
+                    <p>Posted by: <a href="/showuser/{{x.uploaded_by.id}}">{{x.uploaded_by.First_name}} {{x.uploaded_by.Last_name}}</a></p>
+                    <button><a href="/unfavorite/{{x.id}}" class="removefavorites">remove from favorites</a></button>
+                    <br>
+                    {% else %}
+                    <br>
+                    <p>{{x.madeBy}}: {{x.message}}</p>
+                    <p>Postedby: <a href="/showuser/{{x.uploaded_by.id}}" >{{x.uploaded_by.First_name}} {{x.uploaded_by.Last_name}}</a></p>
+                    <button><a href="/unfavorite/{{x.id}}" class="removefavorites">remove from favorites</a></button>
+                    <a href="/quotes/{{x.id}}/delete">delete</a>
+                    <a href="/quotes/{{x.id}}">edit</a>
+                    <br>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+        <div>
+        <form action="/addQuote" method="POST">
+            {% csrf_token %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="errors">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+            <br>
+            <p>Quoted By <textarea name="madeBy" cols="20" rows="1"></textarea></p>
+            <p>Message<textarea name="message" cols="20" rows="3"></textarea></p>
+            <button type="submit">Add!</button>
+        </form>
+    </div>
+</body>
+</html>

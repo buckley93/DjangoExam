@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Success! welcome, {{loggedInUser.First_name}} {{loggedInUser.Last_name}}</h1>
+    <br>
+    <p class="suc">successfully registered or logged in!</p>
+    <br>
+    <p><a href="/logout">Logout!</a></p>
+    <br>
+    <a href="/success"> Go to main page</a>
+    <br>
+</body>
+</html>
